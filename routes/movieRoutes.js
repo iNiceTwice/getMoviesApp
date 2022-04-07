@@ -3,7 +3,7 @@ const router = express.Router()
 const { check } = require("express-validator")
 const auth = require("../middlewares/auth")
 const { getMovies,createMovies,deleteMovie,updateMovie,getOneMovie } = require("../controllers/moviesControl")
-const { deleteImage } = require("../controllers/imageControl")
+const { deleteImage } = require("../controllers/imageControl.js")
 
 const today = new Date()
 const year = today.getFullYear()

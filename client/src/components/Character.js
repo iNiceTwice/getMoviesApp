@@ -19,7 +19,7 @@ const Character = ({ id, name, age, biography, image, movies, selectedMovie }) =
 
     const handleDelete = async () =>{
         try { 
-            axios.delete(`http://localhost:3001/characters/${ id }`,{
+            axios.delete(`https://getmoviesapp.herokuapp.com/characters/${ id }`,{
                 headers:{
                     Authorization: `Bearer ${ token }`
                 }    

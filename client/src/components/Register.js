@@ -24,7 +24,7 @@ const Register = () => {
         },
         onSubmit:(values)=>{
             try {
-                axios.post(`http://localhost:3001/auth/register`,{
+                axios.post(`https://getmoviesapp.herokuapp.com/auth/register`,{
                     email:values.email,
                     password:values.password    
                 }).then(data=>{

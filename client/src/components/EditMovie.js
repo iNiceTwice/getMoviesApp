@@ -52,7 +52,7 @@ const EditMovie = ({ openEdit, id, title, image, year, rating, characters, genre
                 setActorFieldError(true)
             }else if( (genreFieldError && actorFieldError) == false ){
                 try {
-                    axios.put(`http://localhost:3001/movies/${ id }`,{
+                    axios.put(`https://getmoviesapp.herokuapp.com/movies/${ id }`,{
                         title:values.title,
                         synopsis:values.synopsis,
                         rating:values.rating,
@@ -82,7 +82,7 @@ const EditMovie = ({ openEdit, id, title, image, year, rating, characters, genre
         data.append('image', newImage);
 
         try {
-            axios.post("http://localhost:3001/images/upload",data,{
+            axios.post("https://getmoviesapp.herokuapp.com/images/upload",data,{
                     headers:{
                         Authorization:`Bearer ${token}`
                     }}).then(data=>{

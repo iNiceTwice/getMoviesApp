@@ -53,7 +53,7 @@ const SearchBar = ({data}) => {
         const fetchData = async (token) => {
         if(token){
             try {
-            await axios.get(`http://localhost:3001/search/?q=${query}`,{
+            await axios.get(`https://getmoviesapp.herokuapp.com/search/?q=${query}`,{
                 headers:{
                 Authorization: `Bearer ${token}`
                 }

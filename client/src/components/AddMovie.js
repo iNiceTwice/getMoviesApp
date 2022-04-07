@@ -60,7 +60,7 @@ const AddMovie = () => {
             }else if((genreFieldError  && actorFieldError && imgFieldError) == false){
 
                 try {
-                    axios.post(`http://localhost:3001/movies`,{
+                    axios.post(`https://getmoviesapp.herokuapp.com/movies`,{
                         title:values.title,
                         synopsis:values.synopsis,
                         rating:values.rating,
@@ -86,7 +86,7 @@ const AddMovie = () => {
         let data = new FormData();
         data.append('image', image);
         try {
-            await axios.post("http://localhost:3001/images/upload",data,{
+            await axios.post("https://getmoviesapp.herokuapp.com/images/upload",data,{
                 headers:{
                     Authorization: `Bearer ${token}`
                 }

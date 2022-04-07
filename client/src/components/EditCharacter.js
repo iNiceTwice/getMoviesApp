@@ -39,7 +39,7 @@ const EditCharacter = ({ openEdit, name, image, age, movies, biography }) => {
                 setMovieFieldError(true)
             }else if( movieFieldError == false ){
                 try {
-                    axios.put(`http://localhost:3001/characters/${name}`,{
+                    axios.put(`https://getmoviesapp.herokuapp.com/characters/${name}`,{
                         name:values.name,
                         age:values.age,
                         biography:values.biography,
@@ -64,7 +64,7 @@ const EditCharacter = ({ openEdit, name, image, age, movies, biography }) => {
         data.append('image', newImage);
         
         try {
-            axios.post("http://localhost:3001/images/upload",data,{
+            axios.post("https://getmoviesapp.herokuapp.com/images/upload",data,{
                 headers:{
                     Authorization: `Bearer ${token}`
                 }

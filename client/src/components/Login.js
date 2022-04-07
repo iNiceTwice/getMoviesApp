@@ -22,7 +22,7 @@ const Login = () => {
         },
         onSubmit:(values)=>{
             try {
-                axios.post(`http://localhost:3001/auth/login`,{
+                axios.post(`https://getmoviesapp.herokuapp.com/auth/login`,{
                     email:values.email,
                     password:values.password    
                 }).then(data=>{

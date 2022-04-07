@@ -95,7 +95,7 @@ const Home = () => {
         const getMovies = async () => {
        
             try {
-                await axios.get("http://localhost:3001/movies",{
+                await axios.get("https://getmoviesapp.herokuapp.com/movies",{
                     headers:{
                         Authorization:`Bearer ${token}`
                     }
@@ -111,7 +111,7 @@ const Home = () => {
         const getCharacters = async () => {
           
             try {
-                await axios.get("http://localhost:3001/characters",{
+                await axios.get("https://getmoviesapp.herokuapp.com/characters",{
                     headers:{
                         Authorization:`Bearer ${token}`
                     }

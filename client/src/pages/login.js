@@ -1,21 +1,19 @@
-import React , { useState } from 'react';
-import { Button, Paper, TextField, Grid, Typography, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@mui/material"
-import { Visibility, VisibilityOff } from "@mui/icons-material"
+import React, { useState } from 'react';
+import { Button, Paper, TextField, Grid, Alert, Typography } from "@mui/material"
 import { useFormik } from "formik"
 import { useNavigate, Link } from "react-router-dom"
-import axios from "axios"
+import { axiosInstance } from "../config/config"
 import * as yup from "yup"
 
 const validationSchema = yup.object().shape({
-    email:yup.string().email("Ingresa un e-mail válido").required("This field is required"),
-    password:yup.string().required("Este campo es obligatorio").min(8,"Contain at least 8 characters").max(16,"Contain at least 16 characters")
+    email:yup.string().email("Please enter a valid email").required("This field is required"),
+    password:yup.string().required("This field is required").min(8,"Contain at least 8 characters").max(16,"Contain at least 16 characters")
 })
 
-const Register = () => {
-    
-    let redirect = useNavigate()
+const Login = () => {
 
-    const [showPassword, setShowPassword] = useState(false)
+    let redirect = useNavigate()
+    const [badCredentials,setBadCredentials] = useState(false)
 
     const formik = useFormik({
         initialValues:{
@@ -24,36 +22,36 @@ const Register = () => {
         },
         onSubmit:(values)=>{
             try {
-                axios.post(`https://getmoviesapp.herokuapp.com/auth/register`,{
+                axiosInstance.post(`/auth/login`,{
                     email:values.email,
                     password:values.password    
-                }).then(data=>{
+                }).then( data => {
+            
+                    if(data.data.status == 401){
+                        setBadCredentials(true)
+                    }else{
+                        localStorage.setItem("token",data.data)
+                        redirect("/home")
+                    }
                     //store token in localstorage
-                    localStorage.setItem("token",data.data)
-                    redirect("/home")
+                    console.log(data.data.status)
                 })
             } catch (error) {
                 console.log(error)
             }
         },validationSchema: validationSchema
     })
-
-     const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
-
     return ( 
         <div className='center' style={{backgroundColor:"rgba(29,29,40,255)",height:"100vh"}}>
             <Paper style={{backgroundColor:"rgba(29,29,40,255)",padding:"5rem"}} variant="outlined">
                 <form onSubmit={formik.handleSubmit}>
                     <Grid className='center' style={{width:"30rem"}} container spacing={3}>
                         <Grid item xs={12}>
-                            <Typography variant="h2">Register</Typography>
+                            <Typography variant="h2">Login</Typography>
                         </Grid>
+                        {
+                            badCredentials ? <Grid item xs={12}><Alert fullWidth severity='error'>Incorrect credentials.</Alert></Grid> : null
+                        }
                         <Grid item xs={12}>
                             <TextField fullWidth  
                                 label="Email" 
@@ -66,40 +64,28 @@ const Register = () => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                           <TextField
-                                fullWidth
-                                label="Password"
-                                id="outlined-adornment-password"
-                                type={showPassword ? 'text' : 'password'}
+                            <TextField fullWidth  
+                                type="password"
+                                label="Password" 
                                 name="password"
                                 value={formik.values.password}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 error={formik.touched.password && Boolean(formik.errors.password)}
                                 helperText={formik.touched.password && formik.errors.password}
-                                InputProps={{
-                                    endAdornment: <InputAdornment position="end">   <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                    >
-                                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton></InputAdornment>,
-                                }}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <Button 
                                 type="submit" 
                                 fullWidth 
-                                variant="contained" color="primary">
+                                variant="contained">
                                     Send
                             </Button>
                         </Grid>
                         <Grid item xs={12}>
-                            <span>You already have an account? </span>
-                            <span><Link to="/login" style={{color:"lightblue"}} >Sign in here!</Link></span>
+                            <span>You haven't an account yet? </span>
+                            <span><Link to="/register" style={{color:"lightblue"}} >Sign up here!</Link></span>
                         </Grid>
                     </Grid>
                 </form>
@@ -108,4 +94,4 @@ const Register = () => {
      );
 }
  
-export default Register;
+export default Login;

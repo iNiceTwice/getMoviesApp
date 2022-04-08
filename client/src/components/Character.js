@@ -2,7 +2,7 @@ import React, { useState }from 'react';
 import { Box, Grid, Button, Typography, IconButton } from "@mui/material"
 import { Edit, Delete } from '@mui/icons-material';
 import EditCharacter from "./EditCharacter"
-import axios from "axios"
+import { axiosInstance } from '../config/config';
 
 
 const Character = ({ id, name, age, biography, image, movies, selectedMovie }) => {
@@ -17,9 +17,9 @@ const Character = ({ id, name, age, biography, image, movies, selectedMovie }) =
         setIsEdit(true)
     }
 
-    const handleDelete = async () =>{
+    const handleDelete = () =>{
         try { 
-            axios.delete(`https://getmoviesapp.herokuapp.com/characters/${ id }`,{
+            axiosInstance.delete(`/characters/${ id }`,{
                 headers:{
                     Authorization: `Bearer ${ token }`
                 }    

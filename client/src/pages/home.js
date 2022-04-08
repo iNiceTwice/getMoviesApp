@@ -2,11 +2,10 @@ import React,{ useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Character from "../components/Character"
 import { Grid, Button, Tabs, Tab, Typography } from "@mui/material"
-import Item from "./Item"
-import Movie from "./Movie"
-import axios from "axios"
-import Nav from "./Nav"
-
+import Item from "../components/Item"
+import Movie from "../components/Movie"
+import Nav from "../components/Nav"
+import { axiosInstance } from '../config/config';
 
 const Home = () => {
 
@@ -37,7 +36,7 @@ const Home = () => {
         image:""
     })
 
-    const getOneCharacter = async (character) => {
+    const getOneCharacter = (character) => {
 
         let selectedCharacter = characters.filter(char=> char.name == character)
       
@@ -60,7 +59,7 @@ const Home = () => {
         }
     }
 
-    const getOneMovie = async (movie) => {
+    const getOneMovie = (movie) => {
 
         let selectedMovie = movies.filter(film=> film.title == movie)
         
@@ -92,10 +91,10 @@ const Home = () => {
     useEffect(()=>{
         if(!token) redirect("/login")
 
-        const getMovies = async () => {
+        const getMovies = () => {
        
             try {
-                await axios.get("https://getmoviesapp.herokuapp.com/movies",{
+                axiosInstance.get("/movies",{
                     headers:{
                         Authorization:`Bearer ${token}`
                     }
@@ -108,10 +107,10 @@ const Home = () => {
             }
 
         }
-        const getCharacters = async () => {
+        const getCharacters = () => {
           
             try {
-                await axios.get("https://getmoviesapp.herokuapp.com/characters",{
+                axiosInstance.get("/characters",{
                     headers:{
                         Authorization:`Bearer ${token}`
                     }
@@ -126,6 +125,7 @@ const Home = () => {
         
         getMovies(token)
         getCharacters(token)
+        
     },[])
 
     return ( 

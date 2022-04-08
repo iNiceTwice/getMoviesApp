@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 import { useFormik } from "formik"
 import FormData from "form-data"
 import * as yup from "yup" 
-import axios from "axios"
+import { axiosInstance } from '../config/config';
 
 const validationSchema = yup.object().shape({
     name:yup.string().required("This field is required"),
@@ -39,7 +39,7 @@ const EditCharacter = ({ openEdit, name, image, age, movies, biography }) => {
                 setMovieFieldError(true)
             }else if( movieFieldError == false ){
                 try {
-                    axios.put(`https://getmoviesapp.herokuapp.com/characters/${name}`,{
+                    axiosInstance.put(`/characters/${name}`,{
                         name:values.name,
                         age:values.age,
                         biography:values.biography,
@@ -64,7 +64,7 @@ const EditCharacter = ({ openEdit, name, image, age, movies, biography }) => {
         data.append('image', newImage);
         
         try {
-            axios.post("https://getmoviesapp.herokuapp.com/images/upload",data,{
+            axiosInstance.post("/images/upload",data,{
                 headers:{
                     Authorization: `Bearer ${token}`
                 }

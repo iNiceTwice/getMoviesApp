@@ -7,11 +7,12 @@ const imageRoutes = require("./routes/uploadRoutes");
 const characterRoutes = require("./routes/characterRoutes");
 const searchRoutes = require("./routes/searchRoutes");
 const { mongoUri } = require("./keys");
+const path = require("path")
 const app = express();
 
 
 //Connecting to DB
-mongoose.connect(process.env.MONGO_URI, { 
+mongoose.connect(mongoUri, { 
     useNewUrlParser: true,
     useUnifiedTopology: true 
 })
@@ -31,6 +32,11 @@ app.use(imageRoutes)
 app.use(characterRoutes)
 app.use(searchRoutes)
 
+//set production build
+app.use(express.static(path.join(__dirname, "/client")))
+app.get("*", (req,res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"))
+})
 
 //server settings 
 app.set("port", process.env.PORT || 3001);

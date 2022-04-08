@@ -1,11 +1,11 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from "react-router-dom"
-import Main from "./components/Main"
-import Login from './components/Login';
-import Register from "./components/Register"
-import Home from "./components/Home"
-import AddMovie from "./components/AddMovie"
-import AddCharacter from "./components/AddCharacter"
+import Main from "./pages/main"
+import Login from './pages/login';
+import Register from "./pages/register"
+import Home from "./pages/home"
+import AddMovie from "./pages/addMovie"
+import AddCharacter from "./pages/addCharacter"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({

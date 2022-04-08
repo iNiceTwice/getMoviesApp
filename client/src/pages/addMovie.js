@@ -4,10 +4,10 @@ import { useFormik } from "formik"
 import { useNavigate, useLocation } from "react-router-dom"
 import { styled } from '@mui/material/styles';
 import { Add } from "@mui/icons-material"
-import GenreSelect from "./GenreSelect"
+import GenreSelect from "../components/GenreSelect"
 import FormData from "form-data"
-import axios from "axios"
 import * as yup from "yup"
+import { axiosInstance } from '../config/config';
 
 const today = new Date()
 const year = today.getFullYear()
@@ -60,7 +60,7 @@ const AddMovie = () => {
             }else if((genreFieldError  && actorFieldError && imgFieldError) == false){
 
                 try {
-                    axios.post(`https://getmoviesapp.herokuapp.com/movies`,{
+                    axiosInstance.post(`/movies`,{
                         title:values.title,
                         synopsis:values.synopsis,
                         rating:values.rating,
@@ -81,12 +81,12 @@ const AddMovie = () => {
             }
         },validationSchema: validationSchema
     })
-    const handleUpload = async (e) => { //upload selected image
+    const handleUpload = (e) => { //upload selected image
         const image = e.target.files[0]
         let data = new FormData();
         data.append('image', image);
         try {
-            await axios.post("https://getmoviesapp.herokuapp.com/images/upload",data,{
+            axiosInstance.post("/images/upload",data,{
                 headers:{
                     Authorization: `Bearer ${token}`
                 }

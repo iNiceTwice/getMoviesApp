@@ -4,7 +4,7 @@ import { useFormik } from "formik"
 import { useLocation, useNavigate } from "react-router-dom"
 import { styled } from '@mui/material/styles';
 import { Add } from "@mui/icons-material"
-import axios from "axios"
+import { axiosInstance } from "../config/config"
 import FormData from "form-data"
 import * as yup from "yup"
 
@@ -52,7 +52,7 @@ const AddCharacter = () => {
                 setImgFieldError(true)
             }else if( (movieFieldError && imgFieldError) == false ){
                 try {
-                    axios.post(`https://getmoviesapp.herokuapp.com/characters`,{
+                    axiosInstance.post(`/characters`,{
                         name:values.name,
                         age:values.age,
                         biography:values.biography,
@@ -75,7 +75,7 @@ const AddCharacter = () => {
         let data = new FormData();
         data.append('image', image);
         try {
-            await axios.post("https://getmoviesapp.herokuapp.com/images/upload",data,{
+            await axiosInstance.post("/images/upload",data,{
                 headers:{
                     Authorization: `Bearer ${token}`
                 }

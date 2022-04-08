@@ -2,24 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, Grid, Chip, Stack, Typography, IconButton } from "@mui/material"
 import { Star, Edit, Delete, StarBorderOutlined } from "@mui/icons-material"
 import EditMovie from "./EditMovie"
-import axios from "axios"
+import { axiosInstance } from '../config/config';
 
 const Movie = ({ id, title, year, rating, image, characters, genres, synopsis ,selectedCharacter }) => {
-    const stars = []
-    const greyStars = []
+  
     const [isEditMovie,setIsEditMovie] = useState(false)
-    const [token,setToken] = useState("")
+    const [token,setToken] = useState("") 
 
-    for(let i=1;i<=rating;i++){
-        stars.push([<Star key={i} sx={{color:"#E4D34E"}}/>])
-    }
-    for(let i=1;i<=5-rating;i++){
-        greyStars.push(<Star key={i} sx={{color:"gray"}}/>)
-    }    
-
-    const handleDelete = async () =>{
+    const handleDelete = () =>{
         try {
-            axios.delete(`https://getmoviesapp.herokuapp.com/movies/${ id }`,{
+            axiosInstance.delete(`/movies/${ id }`,{
                 headers:{
                     Authorization: `Bearer ${ token }`
                 }    

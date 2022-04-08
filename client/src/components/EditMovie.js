@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import GenreSelect from "./GenreSelect";
 import FormData from "form-data";
 import * as yup from "yup";
-import axios from "axios";
+import { axiosInstance } from '../config/config';
 
 const today = new Date()
 const year = today.getFullYear()
@@ -52,7 +52,7 @@ const EditMovie = ({ openEdit, id, title, image, year, rating, characters, genre
                 setActorFieldError(true)
             }else if( (genreFieldError && actorFieldError) == false ){
                 try {
-                    axios.put(`https://getmoviesapp.herokuapp.com/movies/${ id }`,{
+                    axiosInstance.put(`/movies/${ id }`,{
                         title:values.title,
                         synopsis:values.synopsis,
                         rating:values.rating,
@@ -82,7 +82,7 @@ const EditMovie = ({ openEdit, id, title, image, year, rating, characters, genre
         data.append('image', newImage);
 
         try {
-            axios.post("https://getmoviesapp.herokuapp.com/images/upload",data,{
+            axiosInstance.post("/images/upload",data,{
                     headers:{
                         Authorization:`Bearer ${token}`
                     }}).then(data=>{

@@ -3,7 +3,7 @@ import { InputBase } from "@mui/material"
 import { useNavigate, Link } from 'react-router-dom';
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from "@mui/icons-material/Search"
-import axios from "axios"
+import { axiosInstance } from '../config/config';
 
 const SearchBar = ({data}) => {
 
@@ -42,26 +42,27 @@ const SearchBar = ({data}) => {
             padding: theme.spacing(1, 1, 1, 0),
             // vertical padding + font size from searchIcon
             paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        
             width: '100%',
         
         },
     }));
 
     useEffect(()=>{
+
         const token = localStorage.getItem("token")
-        const fetchData = async (token) => {
+
+        const fetchData = (token) => {
         if(token){
             try {
-            await axios.get(`https://getmoviesapp.herokuapp.com/search/?q=${query}`,{
-                headers:{
-                Authorization: `Bearer ${token}`
-                }
-            }).then(res=>{
+                axiosInstance.get(`/search/?q=${query}`,{
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
+            }).then( res => {
                 data(res.data)
             })
             } catch (error) {
-            console.log(error)
+                console.log(error)
             }
         }else{
             redirect("/login")

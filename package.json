@@ -1,8 +1,7 @@
 {
   "scripts": {
-    "mi:client": "cd client && run npm start",
-    "mi:server":"node index.js",
-    "start": "npm-run-all --parallel mi:*"
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",

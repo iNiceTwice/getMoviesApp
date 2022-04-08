@@ -34,8 +34,9 @@ app.use(searchRoutes)
 
 //set production build
 app.use(express.static(path.join(__dirname, "/client")))
+
 app.get("*", (req,res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"))
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"))
 })
 
 //server settings 

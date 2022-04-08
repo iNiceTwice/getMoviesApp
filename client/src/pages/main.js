@@ -10,7 +10,7 @@ const Main = () => {
             
             <video style={{overflow:"hidden", margin:0,backgroundColor:"black",position:"fixed",minHeight:"calc(100vh)",minWidth:"100%",zIndex:0}} src="img/webassets/main-background.mp4" loop muted autoPlay></video>
     
-            <Grid sx={{maxWidth:"40rem", backgroundColor:"rgba(0,0,0,0.2)", borderRadius:"10px" ,p:9,zIndex:20}} className='center' container spacing={2}>
+            <Grid sx={{maxWidth:"40rem", backgroundColor:"rgba(0,0,0,0.2)", borderRadius:"10px" ,py:"5rem", p:{md:"5rem"},zIndex:20}} className='center' container spacing={2}>
                 <Grid item xs={12} sx={{display:"flex",justifyContent:"center"}}>
                       <Typography
                         className="bold"

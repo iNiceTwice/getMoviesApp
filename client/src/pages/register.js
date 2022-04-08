@@ -47,10 +47,10 @@ const Register = () => {
     };
 
     return ( 
-        <div className='center' style={{backgroundColor:"rgba(29,29,40,255)",height:"100vh"}}>
-            <Paper style={{backgroundColor:"rgba(29,29,40,255)",padding:"5rem"}} variant="outlined">
-                <form onSubmit={formik.handleSubmit}>
-                    <Grid className='center' style={{width:"30rem"}} container spacing={3}>
+        <div className='center' style={{backgroundColor:"rgba(29,29,40,255)",height:"calc(100vh)"}}>
+            <Paper sx={{backgroundColor:"rgba(29,29,40,255)",py:"5rem", p:{md:"5rem"}}} variant="outlined">
+                <form className='center' onSubmit={formik.handleSubmit}>
+                    <Grid sx={{width:"85%", maxWidth:"30rem"}} container spacing={3}>
                         <Grid item xs={12}>
                             <Typography variant="h2">Register</Typography>
                         </Grid>

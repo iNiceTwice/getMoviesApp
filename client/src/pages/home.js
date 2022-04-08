@@ -32,6 +32,7 @@ const Home = () => {
         synopsis:"",
         date_of:0,
         rating:0,
+        genres:[],
         characters:[],
         image:""
     })
@@ -66,6 +67,7 @@ const Home = () => {
         if(selectedMovie.length){
             setMovie({
                 id:selectedMovie[0].id,
+                genres:selectedMovie[0].genres,
                 title:selectedMovie[0].title,
                 synopsis:selectedMovie[0].synopsis,
                 date_of:selectedMovie[0].date_of,
@@ -185,7 +187,8 @@ const Home = () => {
                                         characters:film.characters,
                                         image:film.image
                                     })
-                                    setRender("movie")             
+                                    setRender("movie")
+                                    window.scrollTo(0, 0)             
                                 }}>
                                     <Item image={film.image} title={film.title}/>        
                                 </Button>
@@ -204,7 +207,8 @@ const Home = () => {
                                         movies:character.movies,
                                         image:character.image
                                     })
-                                    setRender("character")             
+                                    setRender("character")
+                                    window.scrollTo(0, 0)             
                                 }}>
                                     <Item image={character.image} title={character.name}/>        
                                 </Button>
@@ -224,7 +228,8 @@ const Home = () => {
                                             movies:item.movies,
                                             image:item.image
                                         })
-                                        setRender("character")             
+                                        setRender("character")
+                                        window.scrollTo(0, 0)             
                                     }}>
                                         <Item image={item.image} title={item.name}/>        
                                     </Button>
@@ -242,7 +247,8 @@ const Home = () => {
                                             characters:item.characters,
                                             image:item.image
                                         })
-                                        setRender("movie")             
+                                        setRender("movie") 
+                                        window.scrollTo(0, 0)            
                                     }}>
                                         <Item image={item.image} title={item.title}/>        
                                     </Button>

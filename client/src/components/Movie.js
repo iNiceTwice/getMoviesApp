@@ -4,7 +4,7 @@ import { Star, Edit, Delete, StarBorderOutlined } from "@mui/icons-material"
 import EditMovie from "./EditMovie"
 import { axiosInstance } from '../config/config';
 
-const Movie = ({ id, title, year, rating, image, characters, genres, synopsis ,selectedCharacter }) => {
+const Movie = ({ id, title, year, rating, image, characters, genres, synopsis , selectedCharacter }) => {
   
     const [isEditMovie,setIsEditMovie] = useState(false)
     const [token,setToken] = useState("") 
@@ -47,14 +47,15 @@ const Movie = ({ id, title, year, rating, image, characters, genres, synopsis ,s
                 <Box>
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
-                            <div style={{
+                            <Box sx={{
                                     paddingTop:"7rem",
                                     display:"flex",
                                     alignItems:"flex-end", 
                                     backgroundSize:"cover", 
                                     backgroundPosition:"center",
                                     backgroundRepeat:"no-repeat",
-                                    backgroundImage:`linear-gradient(to bottom, rgba(0,0,0,0), rgba(29,29,40,255)),url(${image})` ,height:"40rem",
+                                    backgroundImage:`linear-gradient(to bottom, rgba(0,0,0,0), rgba(29,29,40,255)),url(${image})`,
+                                    height:{xs:"30rem",md:"40rem"},
                                     width:"100%"
                             }}>
                                 <div style={{
@@ -65,7 +66,7 @@ const Movie = ({ id, title, year, rating, image, characters, genres, synopsis ,s
                                         marginBottom:"3rem", 
                                         alignItems:"center"
                                 }}>
-                                    <Typography sx={{mr:2}} variant='h4'>{ title } </Typography>
+                                    <Typography sx={{mr:2, fontSize:"1.5rem"}} variant='h4'>{ title } </Typography>
                                     <span>({year})</span>
                                 </div>
                                 <div style={{
@@ -73,8 +74,8 @@ const Movie = ({ id, title, year, rating, image, characters, genres, synopsis ,s
                                         flexDirection:"column", 
                                         alignSelf:"flex-end",
                                         marginTop:"5rem",
-                                        marginRight:"1rem", 
-                                        marginBottom:"25rem", 
+                                        marginRight:"0.5rem", 
+                                        marginBottom:"20rem", 
                                         alignItems:"center"
                                 }}>
                                     <IconButton onClick={handleDelete}>
@@ -84,7 +85,7 @@ const Movie = ({ id, title, year, rating, image, characters, genres, synopsis ,s
                                         <Edit fontSize="large" sx={{color:"white",opacity:0.7}} />
                                     </IconButton>
                                 </div>
-                            </div>
+                            </Box>
                             <Stack justifyContent="start" sx={{mt:-5,ml:4, flexWrap:"wrap"}} direction="row">
                                 {
 
@@ -134,7 +135,10 @@ const Movie = ({ id, title, year, rating, image, characters, genres, synopsis ,s
                                 {
 
                                     characters.map((char,i)=>(
-                                        <Button onClick={()=>{selectedCharacter(char)}} key={i} sx={{color:"white"}}>{char}</Button>
+                                        <Button onClick={()=>{
+                                            selectedCharacter(char)
+                                            window.scrollTo(0, 0)
+                                        }} key={i} sx={{color:"white"}}>{char}</Button>
                                     ))
 
                                 }

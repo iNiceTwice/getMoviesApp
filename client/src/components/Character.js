@@ -7,8 +7,6 @@ import { axiosInstance } from '../config/config';
 
 const Character = ({ id, name, age, biography, image, movies, selectedMovie }) => {
 
-    console.log(id)
-
     const token = localStorage.getItem("token")
 
     const [isEdit, setIsEdit] = useState(false)
@@ -51,7 +49,7 @@ const Character = ({ id, name, age, biography, image, movies, selectedMovie }) =
                                     backgroundSize:"cover", 
                                     backgroundPosition:"center",
                                     backgroundRepeat:"no-repeat",
-                                    backgroundImage:`linear-gradient(to bottom, rgba(0,0,0,0), rgba(29,29,40,255)),url(${image})` ,height:"40rem",
+                                    backgroundImage:`linear-gradient(to bottom, rgba(0,0,0,0), rgba(29,29,40,255)),url(${image})` ,height:"25rem",
                                     width:"100%"
                             }}>
                                 <div style={{
@@ -62,7 +60,7 @@ const Character = ({ id, name, age, biography, image, movies, selectedMovie }) =
                                         marginBottom:"3rem", 
                                         alignItems:"center"
                                 }}>
-                                    <Typography sx={{mr:2}} variant='h4'>{ name } </Typography>
+                                    <Typography sx={{mr:2, fontSize:"1.5rem"}} variant='h4'>{ name } </Typography>
                                     <span>({age})</span>
                                 </div>
                                 <div style={{
@@ -95,7 +93,10 @@ const Character = ({ id, name, age, biography, image, movies, selectedMovie }) =
                                 {
 
                                     movies.map((movie,i)=>(
-                                        <Button onClick={()=>{selectedMovie(movie)}} key={i} sx={{color:"white"}}>{movie}</Button>
+                                        <Button onClick={()=>{
+                                            selectedMovie(movie)
+                                            window.scrollTo(0, 0)
+                                        }} key={i} sx={{color:"white"}}>{movie}</Button>
                                     ))
 
                                 }

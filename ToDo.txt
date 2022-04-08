@@ -1,0 +1,3 @@
+
+cuando se haga click en una peli/personaje anchor al item selec y lo mismo para cuando se busque
+agregar mas pelis y personajes

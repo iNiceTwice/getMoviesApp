@@ -42,14 +42,15 @@ const Character = ({ id, name, age, biography, image, movies, selectedMovie }) =
                 <Box>
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
-                            <div style={{
+                            <Box sx={{
                                     paddingTop:"15rem",
                                     display:"flex",
                                     alignItems:"flex-end", 
                                     backgroundSize:"cover", 
                                     backgroundPosition:"center",
                                     backgroundRepeat:"no-repeat",
-                                    backgroundImage:`linear-gradient(to bottom, rgba(0,0,0,0), rgba(29,29,40,255)),url(${image})` ,height:"25rem",
+                                    backgroundImage:`linear-gradient(to bottom, rgba(0,0,0,0), rgba(29,29,40,255)),url(${image})` ,
+                                    height:{xs:"25rem",md:"40rem"},
                                     width:"100%"
                             }}>
                                 <div style={{
@@ -79,7 +80,7 @@ const Character = ({ id, name, age, biography, image, movies, selectedMovie }) =
                                         <Edit fontSize="large" sx={{color:"white",opacity:0.7}} />
                                     </IconButton>
                                 </div>
-                            </div>
+                            </Box>
                         </Grid>
                         <Grid item xs={12} sx={{mx:2}}>
                             <div>

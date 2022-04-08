@@ -6,14 +6,14 @@ const MOVIES_DB = require("../models/movies")
 const CHARACTERS_DB = require("../models/characters")
 
 const storage = multer.diskStorage({
-    destination:"../client/public/img",
+    destination: path.join(__dirname,"../client/public/img"),
     filename:(req,file,cb)=>{
         const ext = path.extname(file.originalname)
         cb(null,`${uuidv4()}${ext}`)
     }
 })
 
-exports.upload = multer({storage, dest:"../client/public/img"})
+exports.upload = multer({storage, dest: path.join(__dirname,"../client/public/img")})
 
 
 exports.uploadImage = (req,res,next) => {
@@ -22,7 +22,7 @@ exports.uploadImage = (req,res,next) => {
 
     if(destination && filename && oldImageUrl){ // this will delete the old image on update
         try {
-            fs.unlinkSync(`../client/public/${oldImageUrl}`)
+            fs.unlinkSync(path.join(__dirname,`../client/public/${oldImageUrl}`))
         } catch(err) {
             console.error(err)
         }
@@ -39,13 +39,13 @@ exports.deleteImage = async (req,res,next) =>{
 
     if(movie){
         try {
-            fs.unlinkSync(`../client/public/${movie.image}`)
+            fs.unlinkSync(path.join(__dirname,`../client/public/${movie.image}`))
         } catch(err) {
             console.error(err)
         }
     }else if(character){
          try {
-            fs.unlinkSync(`../client/public/${character.image}`)
+            fs.unlinkSync(path.join(__dirname,`../client/public/${character.image}`))
         } catch(err) {
             console.error(err)
         }

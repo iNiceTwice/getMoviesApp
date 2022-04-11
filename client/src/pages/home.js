@@ -1,7 +1,8 @@
 import React,{ useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Character from "../components/Character"
-import { Grid, Button, Tabs, Tab, Typography } from "@mui/material"
+import { Grid, Button, Tabs, Tab, Typography, Popover } from "@mui/material"
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import Item from "../components/Item"
 import Movie from "../components/Movie"
 import Nav from "../components/Nav"
@@ -36,6 +37,19 @@ const Home = () => {
         characters:[],
         image:""
     })
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     const getOneCharacter = (character) => {
 
@@ -90,6 +104,8 @@ const Home = () => {
         document.querySelector("#all").click()
     }
 
+
+
     useEffect(()=>{
         if(!token) redirect("/login")
 
@@ -133,6 +149,29 @@ const Home = () => {
     return ( 
         <div style={{height:"100%"}}>
             <Nav data={handleData}/>
+            <div style={{position:"fixed", top:"40%",right:10,zIndex:"200",}}>
+                <Button aria-describedby={id} variant="contained" color="error" onClick={handleClick}>
+                    <ErrorOutlineIcon/>
+                </Button>
+                <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: 'center',
+                        horizontal: 'left',
+                    }}
+                    transformOrigin={{
+                        vertical: 'center',
+                        horizontal: 'right',
+                    }}
+                >
+                    <Typography sx={{p: 2 , maxWidth:"40rem"}}>
+                        Dato importante: La app tiene la funcionalidad de subir y guardar imagenes, lamentablemente heroku (host) no soporta esta función, véase en: <a style={{color:"#469B9B"}} href='https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem' target="_blank" >Ephemeral filesystem</a>. Sin embargo, el resto de características funcionan con normalidad.  
+                    </Typography>
+                </Popover>
+            </div>
             <Grid container justifyContent="center"sx={{minHeight:"calc(100vh)",backgroundColor:"rgba(29,29,40,255)"}}>
                 <Grid xs={0} md={4} item >
                     {[

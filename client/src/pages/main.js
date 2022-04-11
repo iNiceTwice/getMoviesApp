@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Grid, Typography } from "@mui/material"
 import { PlayArrow } from "@mui/icons-material"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Main = () => {
+
+    const token = localStorage.getItem("token")
+    const redirect = useNavigate()
+
+    useEffect(()=>{
+        if(token) redirect("/home")
+    },[])
+
     return ( 
         <div className='center' style={{height:"100vh"}}> 
-           
-            
+
             <video style={{overflow:"hidden", margin:0,backgroundColor:"black",position:"fixed",minHeight:"calc(100vh)",minWidth:"100%",zIndex:0}} src="img/webassets/main-background.mp4" loop muted autoPlay></video>
     
             <Grid sx={{maxWidth:"40rem", backgroundColor:"rgba(0,0,0,0.2)", borderRadius:"10px" ,py:"5rem", p:{md:"5rem"},zIndex:20}} className='center' container spacing={2}>

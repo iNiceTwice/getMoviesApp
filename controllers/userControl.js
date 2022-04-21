@@ -20,7 +20,6 @@ exports.loginUser = async (req,res,next) => {
     const user = await USERS_DB.findOne({email})
     //const validation = bcrypt.compareSync(password,user.password)
 
-    console.log(user)
     if(!user){
         return res.json({status:401, message:"User not found"})
     }else{
